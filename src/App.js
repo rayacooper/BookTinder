@@ -1,14 +1,22 @@
 import React from 'react';
-import {BrowserRouter as Router} from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom'
 import './App.css';
+import Navbar from './Components/NavBar/NavBar';
 import routes from './Routes';
 
 function App() {
+
+  let navStyle = {
+    display: window.location.href === ' /' ? 'none' : 'block'
+  }
+
+
   return (
     <div className="App">
-      <Router>
+      <Navbar style={navStyle}/>
+      <BrowserRouter>
         {routes}
-      </Router>
+      </BrowserRouter>
     </div>
   );
 }
