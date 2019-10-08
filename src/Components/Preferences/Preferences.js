@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
+import NavBar from './../NavBar/NavBar';
 import './Preferences.css'
 
 function Preferences(){
     return(
         <div>
+            <NavBar />
             Preferences
         </div>
     )

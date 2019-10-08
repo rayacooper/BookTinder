@@ -1,22 +1,22 @@
-import React from 'react';
-import { BrowserRouter } from 'react-router-dom'
+import React, {useEffect} from 'react';
+import axios from 'axios';
+import { BrowserRouter as Router} from 'react-router-dom'
 import './App.css';
 import Navbar from './Components/NavBar/NavBar';
 import routes from './Routes';
 
 function App() {
 
-  let navStyle = {
-    display: window.location.href === ' /' ? 'none' : 'block'
-  }
-
+  useEffect(() => {
+    axios.get('/ping')
+    .then((ping) => console.log(ping.data))
+  })
 
   return (
-    <div className="App">
-      <Navbar style={navStyle}/>
-      <BrowserRouter>
+    <div className='App'>
+      <Router>
         {routes}
-      </BrowserRouter>
+      </Router>
     </div>
   );
 }
