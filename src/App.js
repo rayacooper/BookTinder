@@ -8,8 +8,8 @@ import routes from './Routes';
 function App() {
 
   useEffect(() => {
-    axios.get('/ping')
-    .then((ping) => console.log(ping.data))
+    axios.post('/post', {string: 'ya dummy!'})
+    .then(res => console.log(res.data))
   })
 
   return (

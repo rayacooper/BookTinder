@@ -6,6 +6,7 @@ const massive = require('massive');
 require('dotenv').config();
 
 const app = express();
+app.use(express.json()); app.use(bodyParser.json()); app.use(cors());
 
 massive(process.env.CONNECTION_STRING)
     .then((dbInstance)=>{
@@ -16,12 +17,15 @@ massive(process.env.CONNECTION_STRING)
         console.log(`Error: ${error}`)
     })
 
-app.use(cors());
-app.use(bodyParser.json());
-
 app.get('/ping', (req, res) => {
     res.send('Cool Beans Dude');
 });
+
+app.post('/post', (req, res) => {
+    const {string} = req.body;
+    console.log(string)
+    res.send(`${string}`)
+})
 
 const port = process.env.PORT;
 
