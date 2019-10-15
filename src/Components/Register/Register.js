@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
+import axios from 'axios';
 import './Register.css'
 
 function Register(props){
@@ -7,6 +8,16 @@ function Register(props){
     const [user_name, updateUsername] = useState('')
     const [user_password, updatePassword] = useState('')
     const [second_password, updateSecond] = useState('')
+
+    const reg = () => {
+        if(user_password === second_password){
+            const stuff = {user_name, user_password}
+            axios.post('/register', stuff)
+            .then(res => console.log(res.data))
+        }else{
+            alert('Passwords do not match. Please try again.')
+        }
+    }
 
     return(
         <div>

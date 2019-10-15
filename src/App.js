@@ -7,10 +7,10 @@ import routes from './Routes';
 
 function App() {
 
-  useEffect(() => {
-    axios.post('/post', {string: 'ya dummy!'})
-    .then(res => console.log(res.data))
-  })
+  // useEffect(() => {
+  //   axios.post('/post', {string: 'ya dummy!'})
+  //   .then(res => console.log(res.data))
+  // })
 
   return (
     <div className='App'>

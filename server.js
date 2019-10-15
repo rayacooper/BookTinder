@@ -27,6 +27,12 @@ app.post('/post', (req, res) => {
     res.send(`${string}`)
 })
 
+app.post('/register', (req, res) => {
+    const {user_name, user_password} = req.body;
+    const db = req.app.get('db');
+    db.REGISTER(user_name, user_password);
+})
+
 const port = process.env.PORT;
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
