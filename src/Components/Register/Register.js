@@ -13,7 +13,10 @@ function Register(props){
         if(user_password === second_password){
             const stuff = {user_name, user_password}
             axios.post('/register', stuff)
-            .then(res => console.log(res.data))
+            .then(res => {
+                console.log(res.data)
+                props.history.push('/mybooks')
+            })
         }else{
             alert('Passwords do not match. Please try again.')
         }

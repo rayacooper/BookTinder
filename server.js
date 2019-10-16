@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const massive = require('massive');
+const controller = require('./controller')
 
 require('dotenv').config();
 
@@ -27,11 +28,7 @@ app.post('/post', (req, res) => {
     res.send(`${string}`)
 })
 
-app.post('/register', (req, res) => {
-    const {user_name, user_password} = req.body;
-    const db = req.app.get('db');
-    db.REGISTER(user_name, user_password);
-})
+app.post('/register', controller.register)
 
 const port = process.env.PORT;
 
