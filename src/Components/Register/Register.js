@@ -14,8 +14,11 @@ function Register(props){
             const stuff = {user_name, user_password}
             axios.post('/register', stuff)
             .then(res => {
-                console.log(res.data)
-                props.history.push('/mybooks')
+                if(res.success){
+                    props.history.push('/mybooks')
+                }else{
+                    alert('That username already exists. Please pick another one')
+                }
             })
         }else{
             alert('Passwords do not match. Please try again.')
@@ -25,10 +28,11 @@ function Register(props){
     return(
         <div>
             Register
-            <input type='text' placeholder='Username' onChange={(e) => updateUsername(e.target.value)} />
-            <input type='password' placeholder='Password' onChange={(e) => updatePassword(e.target.value)} />
-            <input type='password' placeholder='Re-type Password' onChange={(e) => updateSecond(e.target.value)} />
-            <button onClick={() => props.history.push('/mybooks')}>Enter</button>
+            <input type='text' placeholder='Username' onChange={e => updateUsername(e.target.value)} />
+            <input type='password' placeholder='Password' onChange={e => updatePassword(e.target.value)} />
+            <input type='password' placeholder='Re-type Password' onChange={e => updateSecond(e.target.value)} />
+            
+            <button onClick={() => reg()}>Enter</button>
             Already have an account? <Link to='/'>Login here.</Link>
         </div>
     )
