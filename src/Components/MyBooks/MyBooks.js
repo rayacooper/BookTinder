@@ -13,6 +13,7 @@ function MyBooks(props){
             <NavBar />
             <div>
                 My Books List:
+                {booksList}
             </div>
 
         </div>

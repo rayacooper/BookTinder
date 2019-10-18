@@ -1,8 +1,7 @@
-import React, {useEffect} from 'react';
-import axios from 'axios';
+import React from 'react';
+// import axios from 'axios';
 import { BrowserRouter as Router} from 'react-router-dom'
 import './App.css';
-import Navbar from './Components/NavBar/NavBar';
 import routes from './Routes';
 
 function App() {

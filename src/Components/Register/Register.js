@@ -16,8 +16,10 @@ function Register(props){
             .then(res => {
                 if(res.success){
                     props.history.push('/mybooks')
+                    console.log(res.user)
                 }else{
                     alert('That username already exists. Please pick another one')
+                    console.log(res.err)
                 }
             })
         }else{

@@ -1,13 +1,22 @@
 import React, {useState} from 'react';
 import './Login.css'
 import {Link} from 'react-router-dom';
+import axios from 'axios'
 
 function Login(props){
 
     const [user_name, updateUsername] = useState('')
     const [user_password, updatePassword] = useState('')
 
-
+    const login = () => {
+        const obj = {user_name, user_password}
+        axios.post('/login', obj)
+        .then(res => {
+            if (res.success){
+                props.history.push('/mybooks')
+            }
+        })
+    }
 
 
     return(
@@ -16,9 +25,9 @@ function Login(props){
 
             <input type='text' placeholder='Username' onChange={(event) => updateUsername(event.target.value)}/>
             <input type='password' placeholder='Password' onChange={(event) => updatePassword(event.target.value)}/>
-            <button onClick={() => props.history.push('/mybooks')}>Enter</button>
+            <button onClick={() => login()}>Enter</button>
             
-            Don't have an account? <Link to='/register' onClick={console.log('cool beans')}>Register here.</Link>
+            Don't have an account? <Link to='/register'>Register here.</Link>
             
 
         </div>
