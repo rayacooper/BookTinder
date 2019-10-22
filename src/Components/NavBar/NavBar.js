@@ -1,9 +1,21 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom'
+import axios from 'axios';
 
 import './NavBar.css';
 
 function NavBar({history}){
+
+    const logout = () => {
+        axios.get('/logout')
+        .then(getback => {
+            if (getback.data.success){
+                history.push('/')
+            }else{
+                alert('Error logging out. Please try again.')
+            }
+        })
+    }
 
          return(
             <div>

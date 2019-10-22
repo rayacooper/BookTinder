@@ -14,7 +14,7 @@ function Register(props){
             const stuff = {user_name, user_password}
             axios.post('/register', stuff)
             .then(infoback => {
-                if(infoback.success){
+                if(infoback.data.success){
                     props.history.push('/mybooks')
                     console.log(infoback.user)
                 }else{
