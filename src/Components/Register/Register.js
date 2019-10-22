@@ -13,13 +13,13 @@ function Register(props){
         if(user_password === second_password){
             const stuff = {user_name, user_password}
             axios.post('/register', stuff)
-            .then(res => {
-                if(res.success){
+            .then(infoback => {
+                if(infoback.success){
                     props.history.push('/mybooks')
-                    console.log(res.user)
+                    console.log(infoback.user)
                 }else{
                     alert('That username already exists. Please pick another one')
-                    console.log(res.err)
+                    console.log(infoback.err)
                 }
             })
         }else{
