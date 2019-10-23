@@ -30,5 +30,36 @@ module.exports = {
     logout: (req, res, next) => {
         req.session.destroy();
         res.send({success:true})
+    },
+    login: (req, res, next) => {
+        const db = req.app.get('db');
+        const {user_name, user_password} = req.body;
+        let tempUser = {}
+        db.FIND_MATCHING_USERNAME([user_name])
+        .then(rez => {
+            console.log(rez)
+            if(rez.length < 1){
+                throw ("Username doesn't exist.")
+            }
+            tempUser = rez[0];
+
+            return bcrypt.compare(user_password, tempUser.user_password )
+            .then(isMatch => {
+                if(!isMatch){
+                    throw ('Passwords do not match.')
+                }
+
+                delete tempUser.user_password;
+                req.session.user = tempUser;
+                res.send({success:true, tempUser})
+            })
+            .catch(err => {
+                res.send({success: false, err})
+            })
+        })
+        .catch((err) => {
+            res.send({success:false, err}) 
+            console.log('sad beans');
+        })
     }
 }

@@ -8,12 +8,15 @@ function Login(props){
     const [user_name, updateUsername] = useState('')
     const [user_password, updatePassword] = useState('')
 
-    const login = () => {
+    const log = () => {
         const obj = {user_name, user_password}
         axios.post('/login', obj)
         .then(res => {
-            if (res.success){
+            console.log(res)
+            if (res.data.success){
                 props.history.push('/mybooks')
+            }else{
+                alert(`Error occured: ${res.data.err}`)
             }
         })
     }
@@ -25,7 +28,7 @@ function Login(props){
 
             <input type='text' placeholder='Username' onChange={(event) => updateUsername(event.target.value)}/>
             <input type='password' placeholder='Password' onChange={(event) => updatePassword(event.target.value)}/>
-            <button onClick={() => login()}>Enter</button>
+            <button onClick={() => log()}>Enter</button>
             
             Don't have an account? <Link to='/register'>Register here.</Link>
             

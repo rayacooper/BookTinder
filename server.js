@@ -28,16 +28,7 @@ massive(process.env.CONNECTION_STRING)
         console.log(`Error: ${error}`)
     })
 
-app.get('/ping', (req, res) => {
-    res.send('Cool Beans Dude');
-});
-
-app.post('/post', (req, res) => {
-    const {string} = req.body;
-    console.log(string)
-    res.send(`${string}`)
-})
-
+app.post('/login', controller.login)
 app.post('/register', controller.register)
 app.get('/logout', controller.logout)
 

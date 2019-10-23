@@ -29,7 +29,7 @@ function NavBar({history}){
                 </div>
 
                 <div>
-                    <button onClick={() => history.push('/')}>Logout</button>
+                    <button onClick={() => logout}>Logout</button>
                 </div>
             </div>
         )
