@@ -6,8 +6,8 @@ const saltRounds = 10
 module.exports = {
     register: (req, res, next) => {
         const db = req.app.get('db');
-        let {user_name, user_password} = req.body;
-        db.FIND_MATCHING_USERNAME([user_name])
+        let {user_given_name, user_surname, user_email, user_password, img_url} = req.body;
+        db.FIND_MATCHING_EMAIL([user_email])
             .then(rez => {
                 if (rez.length > 0){
                     throw "Username already taken."
@@ -15,7 +15,7 @@ module.exports = {
                 return bcrypt.hash(user_password, saltRounds)
             })
             .then(hash => {
-                return db.book_user_table.insert({user_name, user_password:hash})
+                return db.book_user_table.insert({user_given_name, user_surname, user_email, user_password:hash, img_url})
             })
             .then(user => {
                 delete user[user_password];
@@ -33,13 +33,13 @@ module.exports = {
     },
     login: (req, res, next) => {
         const db = req.app.get('db');
-        const {user_name, user_password} = req.body;
+        const {user_email, user_password} = req.body;
         let tempUser = {}
-        db.FIND_MATCHING_USERNAME([user_name])
+        db.FIND_MATCHING_EMAIL([user_email])
         .then(rez => {
             console.log(rez)
             if(rez.length < 1){
-                throw ("Username doesn't exist.")
+                throw ("Email is not on file.")
             }
             tempUser = rez[0];
 
@@ -61,5 +61,10 @@ module.exports = {
             res.send({success:false, err}) 
             console.log('sad beans');
         })
+    },
+
+    getBooks: (req, res, next) => {
+        // book table: book_master_list
+        // 
     }
 }

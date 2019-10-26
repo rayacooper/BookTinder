@@ -5,11 +5,11 @@ import axios from 'axios'
 
 function Login(props){
 
-    const [user_name, updateUsername] = useState('')
+    const [user_email, updateEmail] = useState('')
     const [user_password, updatePassword] = useState('')
 
     const log = () => {
-        const obj = {user_name, user_password}
+        const obj = {user_email, user_password}
         axios.post('/login', obj)
         .then(res => {
             console.log(res)
@@ -26,9 +26,9 @@ function Login(props){
         <div>
             Login
 
-            <input type='text' placeholder='Username' onChange={(event) => updateUsername(event.target.value)}/>
+            <input type='text' placeholder='Email' onChange={(event) => updateEmail(event.target.value)}/>
             <input type='password' placeholder='Password' onChange={(event) => updatePassword(event.target.value)}/>
-            <button onClick={() => log()}>Enter</button>
+            <button onClick={() => log()}>Login</button>
             
             Don't have an account? <Link to='/register'>Register here.</Link>
             

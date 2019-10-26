@@ -26,10 +26,12 @@ function NavBar({history}){
                 <div>
                         <Link to="/preferences">My Preferences</Link>
                         <Link to="/mybooks">My Books</Link>
+                        <Link to="/newbook">New Book</Link>
+                        <Link to="/booktinder">Book Tinder</Link>
                 </div>
 
                 <div>
-                    <button onClick={() => logout}>Logout</button>
+                    <button onClick={() => logout()}>Logout</button>
                 </div>
             </div>
         )

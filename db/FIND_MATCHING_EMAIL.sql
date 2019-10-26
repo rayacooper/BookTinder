@@ -1,2 +1,2 @@
 SELECT * FROM book_user_table 
-WHERE user_name = $1
+WHERE user_email = $1
