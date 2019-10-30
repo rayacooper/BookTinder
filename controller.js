@@ -2,11 +2,23 @@ const bcrypt = require('bcrypt');
 
 const saltRounds = 10
 
+// CREATE TABLE book_master_table (
+//     book_id serial,
+//     creator_id INT,
+//     book_title varchar(250),
+//     book_summary varchar,
+//     author_name varchar,
+//     image_url varchar,
+//     PRIMARY KEY (book_id),
+//     FOREIGN KEY(creator_id) REFERENCES book_user_table(user_id)
+// );
+
 
 module.exports = {
     register: (req, res, next) => {
         const db = req.app.get('db');
         let {user_given_name, user_surname, user_email, user_password, img_url} = req.body;
+        let starting_num = 0;
         db.FIND_MATCHING_EMAIL([user_email])
             .then(rez => {
                 if (rez.length > 0){
@@ -15,7 +27,7 @@ module.exports = {
                 return bcrypt.hash(user_password, saltRounds)
             })
             .then(hash => {
-                return db.book_user_table.insert({user_given_name, user_surname, user_email, user_password:hash, img_url})
+                return db.book_user_table.insert({user_given_name, user_surname, user_email, user_password:hash, img_url, starting_num})
             })
             .then(user => {
                 delete user[user_password];
@@ -66,5 +78,19 @@ module.exports = {
     getBooks: (req, res, next) => {
         // book table: book_master_list
         // 
+    },
+
+    makeBook: (req, res, next) => {
+        const {book_title, book_summary, author_name, image_url} = req.body;
+        const creator_id = req.session.user.user_id;
+        const db = req.app.get('db');
+        db.book_master_table.insert({creator_id, book_title, book_summary, author_name, image_url})
+        .then(book => {
+            res.send({success: true, book})
+        })
+        .catch(err => {
+            res.send({success: false, err})
+        })
     }
+
 }
