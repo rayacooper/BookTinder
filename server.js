@@ -28,9 +28,10 @@ massive(process.env.CONNECTION_STRING)
         console.log(`Error: ${error}`)
     })
 
-app.post('/login', controller.login)
-app.post('/register', controller.register)
-app.get('/logout', controller.logout)
+app.post('/login', controller.login);
+app.post('/register', controller.register);
+app.get('/logout', controller.logout);
+app.post('/newbook', controller.makeBook);
 
 const port = process.env.PORT;
 
