@@ -1,7 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './Swiper.css'
 
 function Swiper(){
+
+    const [bookList, updateBookList] = useState([])
+
+    
     return(
         <div>
             Swiper

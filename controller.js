@@ -91,6 +91,22 @@ module.exports = {
         .catch(err => {
             res.send({success: false, err})
         })
+    },
+    getNextBooks: (req, res, next) => {
+        const db = req.app.get('db');
+        const importantNumber = session.user.starting_num
+        const newNumber = importantNumber + 10;
+        db.GET_BOOKS_TO_LOOK_AT([importantNumber, newNumber])
+        .then(books => {
+            res.send({success: true, books})
+            db.UPDATE_USER_BOOK_NUMBER_PLACE([newNumber])
+            .then(res => {
+                console.log(res)
+            })
+        })
+        .catch(err => {
+            res.send({success: false, err})
+        })
     }
 
 }
