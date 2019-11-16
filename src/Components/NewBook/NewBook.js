@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import axios from 'axios';
+import NavBar from './../NavBar/NavBar';
 
-const NewBook = () => {
+const NewBook = (props) => {
 
     const [book_title, updateBookTitle] = useState('');
     const [book_summary, updateBookSummary] = useState('');
@@ -23,6 +24,7 @@ const NewBook = () => {
             .then(getback =>{
                 if(getback.data.success){
                     alert('Cool beans, it worked!')
+                    props.history.push('/mybooks')
                 }else{
                     alert(`Something went wrong: ${getback.data.err}`)
                 }
@@ -33,20 +35,21 @@ const NewBook = () => {
 
     return(
         <div>
+            <NavBar />
             <div className="NewBookMain">
                 <div className="BookMaker">
-                    <lable>Book Cover Image URL
+                    <label>Book Cover Image URL
                         <input type='text' onChange={e => updateImageUrl(e.target.value)}/>
-                    </lable>
-                    <lable>Author Name
-                        <input type='text' onChange={e => updateAuthorName}/>
-                    </lable>
-                    <lable>Book Title
+                    </label>
+                    <label>Author Name
+                        <input type='text' onChange={e => updateAuthorName(e.target.value)}/>
+                    </label>
+                    <label>Book Title
                         <input type='text' onChange={e => updateBookTitle(e.target.value)}/>
-                    </lable>
-                    <lable>Book Summary:
+                    </label>
+                    <label>Book Summary:
                         <input type='text' onChange={e => updateBookSummary(e.target.value)}/>
-                    </lable>
+                    </label>
                 </div>
 
                 <div className="BookMaker">
@@ -56,7 +59,7 @@ const NewBook = () => {
                     <p>{book_summary}</p>
                 </div>
 
-                <button>Submit Book</button>
+                <button onClick={() => submitBook()}>Submit Book</button>
                 
             </div>
         </div>

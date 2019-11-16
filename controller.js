@@ -30,7 +30,8 @@ module.exports = {
                 return db.book_user_table.insert({user_given_name, user_surname, user_email, user_password:hash, img_url, starting_num})
             })
             .then(user => {
-                delete user[user_password];
+                console.log(user)
+                delete user.user_password;
                 req.session.user = user;
                 res.send({success: true, user}) 
             })
