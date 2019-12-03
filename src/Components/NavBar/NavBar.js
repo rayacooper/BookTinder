@@ -24,7 +24,7 @@ function NavBar({history}){
                 </div>
 
                 <div>
-                        <Link to="/preferences">My Preferences</Link>
+                        <Link to="/profile">Profile</Link>
                         <Link to="/mybooks">My Books</Link>
                         <Link to="/newbook">New Book</Link>
                         <Link to="/booktinder">Book Tinder</Link>

@@ -15,6 +15,7 @@ const saltRounds = 10
 
 
 module.exports = {
+
     register: (req, res, next) => {
         const db = req.app.get('db');
         let {user_given_name, user_surname, user_email, user_password, img_url} = req.body;
@@ -40,10 +41,6 @@ module.exports = {
             })
     },
 
-    logout: (req, res, next) => {
-        req.session.destroy();
-        res.send({success:true})
-    },
     login: (req, res, next) => {
         const db = req.app.get('db');
         const {user_email, user_password} = req.body;
@@ -76,6 +73,11 @@ module.exports = {
         })
     },
 
+    logout: (req, res, next) => {
+        req.session.destroy();
+        res.send({success:true})
+    },
+
     getBooks: (req, res, next) => {
         // book table: book_master_list
         // 
@@ -96,14 +98,14 @@ module.exports = {
     getNextBooks: (req, res, next) => {
         const db = req.app.get('db');
         const importantNumber = session.user.starting_num
-        const newNumber = importantNumber + 10;
+        const newNumber = importantNumber + 50;
         db.GET_BOOKS_TO_LOOK_AT([importantNumber, newNumber])
         .then(books => {
             res.send({success: true, books})
             db.UPDATE_USER_BOOK_NUMBER_PLACE([newNumber])
-            .then(res => {
-                console.log(res)
-            })
+            // .then(res => {
+            //     console.log(res)
+            // })
         })
         .catch(err => {
             res.send({success: false, err})

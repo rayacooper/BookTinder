@@ -4,14 +4,14 @@ import {Switch, Route} from 'react-router-dom';
 
 import Login from './Components/Login/Login';
 import Register from './Components/Register/Register';
-import Preferences from './Components/Preferences/Preferences';
+import Profile from './Components/Profile/Profile';
 import MyBooks from './Components/MyBooks/MyBooks';
 import NewBook from './Components/NewBook/NewBook';
 import BookTinder from './Components/BookTinder/BookTinder';
 
 export default (
     <Switch>
-        <Route component={Preferences} path='/preferences' />
+        <Route component={Profile} path='/profile' />
         <Route component={MyBooks} path='/mybooks' />
         <Route component={Register} path='/register' />
         <Route component={NewBook} path='/newbook' />

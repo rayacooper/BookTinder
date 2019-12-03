@@ -10,7 +10,10 @@ const session = require('express-session')
 require('dotenv').config();
 
 const app = express();
-app.use(express.json()); app.use(bodyParser.json()); app.use(cors());
+
+app.use(express.json()); 
+app.use(bodyParser.json()); 
+app.use(cors());
 
 app.use(session({
     secret: process.env.SESSION_SECRET,
@@ -20,8 +23,8 @@ app.use(session({
 }))
 
 massive(process.env.CONNECTION_STRING)
-    .then((dbInstance)=>{
-        app.set('db', dbInstance);
+    .then((databaseVariable)=>{
+        app.set('db', databaseVariable);
         console.log('Db is connected');
     })
     .catch((error) => {
@@ -33,6 +36,13 @@ app.post('/register', controller.register);
 app.get('/logout', controller.logout);
 app.post('/newbook', controller.makeBook);
 
-const port = process.env.PORT;
+app.get('/ping', (req, res, next) => {
+    res.send('This Worked!')
+})
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+const port = process.env.PORT;
+function listening(){
+    console.log(`Listening on port ${port}`)
+}
+
+app.listen(port, listening());
