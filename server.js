@@ -35,6 +35,7 @@ app.post('/login', controller.login);
 app.post('/register', controller.register);
 app.get('/logout', controller.logout);
 app.post('/newbook', controller.makeBook);
+app.get('/user/photo', controller.getPhoto)
 
 app.get('/ping', (req, res, next) => {
     res.send('This Worked!')

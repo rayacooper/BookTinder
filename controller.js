@@ -47,7 +47,6 @@ module.exports = {
         let tempUser = {}
         db.FIND_MATCHING_EMAIL([user_email])
         .then(rez => {
-            console.log(rez)
             if(rez.length < 1){
                 throw ("Email is not on file.")
             }
@@ -95,6 +94,7 @@ module.exports = {
             res.send({success: false, err})
         })
     },
+
     getNextBooks: (req, res, next) => {
         const db = req.app.get('db');
         const importantNumber = session.user.starting_num
@@ -110,6 +110,19 @@ module.exports = {
         .catch(err => {
             res.send({success: false, err})
         })
+    },
+    
+    getPhoto: (req, res, next) => {
+        if (req.session.user){
+            console.log("There's a USER")
+            res.send({success: true, photo: req.session.user.img_url})
+        }else{
+            console.log("NAW FREN")
+            res.send({success: false})
+        }
+        
     }
+    
+
 
 }
