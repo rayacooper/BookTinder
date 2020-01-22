@@ -1,0 +1,15 @@
+.LoginMain {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.Login {
+    width: 80vw;
+    background-color: aquamarine;
+    padding: 10px;
+}
+
+.LoginBoxes {
+    display: block;
+}

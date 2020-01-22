@@ -37,18 +37,24 @@ function Login(props){
 
 
     return(
-        <div>
-            Login
+        <div className="LoginMain">
+            <div className="Login">
+                <h2>Login</h2>
+                <div className="LoginBoxes">
+                    <input type='text' placeholder='Email' onChange={(event) => updateEmail(event.target.value)}/>
+                    <input type='password' placeholder='Password' onChange={(event) => updatePassword(event.target.value)}/>
+                </div>
+                
+                <button onClick={() => log()}>Login</button>
+                <br />
 
-            <input type='text' placeholder='Email' onChange={(event) => updateEmail(event.target.value)}/>
-            <input type='password' placeholder='Password' onChange={(event) => updatePassword(event.target.value)}/>
-            <button onClick={() => log()}>Login</button>
-
-            {/* <button onClick={() => checkServer()}>Check If Server Works</button> */}
-            
-            Don't have an account? <Link to='/register'>Register here.</Link>
-            
-
+                {/* <button onClick={() => checkServer()}>Check If Server Works</button> */}
+                
+                <div className="LoginRegister">
+                    Don't have an account? <Link to='/register'>Register here.</Link>
+                </div>
+                
+            </div>
         </div>
     )
 }
