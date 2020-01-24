@@ -60,6 +60,16 @@ const NewBook = (props) => {
                 </div>
 
                 <button onClick={() => submitBook()}>Submit Book</button>
+
+                <div className="BookMakerTags">
+                    <input type='checkbox' name='tag01' value='Romance'>Romance</input>
+                    <input type='checkbox' name='tag02' value='Fantasy'>Fantasy</input>
+                    <input type='checkbox' name='tag03' value='Sci-Fi'>Sci-Fi</input>
+                    <input type='checkbox' name='tag04' value='Horro'>Horror</input>
+                    <input type='checkbox' name='tag05' value='Fiction'>Fiction</input>
+                    <input type='checkbox' name='tag06' value='Young Adult'>Young Adult</input>
+                    <input type='checkbox' name='tag07' value='New Adult'>New Adult</input>
+                </div>
                 
             </div>
         </div>
